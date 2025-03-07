@@ -1,0 +1,60 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #595959;
+  background-color: rgba(255, 255, 255, 0.87);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #535bf2;
+  text-decoration: inherit;
+  transition: border 0.25s, color 0.25s;
+}
+
+a:hover {
+  color: hsl(0, 0%, 70%);
+
+}
+
+a.active {
+  color: #595959;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button,
+.heroBtn {
+  border-radius: 20vw;
+  border: 1px solid #646cff;
+  color: #535bf2;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s;
+  background-color: transparent;
+}
+
+button:hover,
+.heroBtn:hover {
+  border-color: #e2e2e2;
+  color: hsl(0, 0%, 70%);
+}
