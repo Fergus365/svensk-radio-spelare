@@ -12,19 +12,29 @@ function RadioPlayer() {
 
   useEffect(() => {
     const fetchData = async () => {
-      console.log("Hämtar data:", new Date().toLocaleTimeString());
-      await fetch("https://de1.api.radio-browser.info/json/stations/bycountry/Sweden")
-        .then((response) => response.json())
-        .then((json) => {
-          setChannels(json);
-          setOriginalChannels(json);
-          setFilteredChannels(json);
-        })
-        .catch((error) => console.error("Error:", error));
+      try {
+        const response = await fetch("https://de1.api.radio-browser.info/json/stations/bycountry/Sweden");
+        const json = await response.json();
+        const httpsChannels = json.filter((channel) => channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://"));
+        setChannels(httpsChannels);
+        setOriginalChannels(httpsChannels);
+        setFilteredChannels(httpsChannels);
+      } catch (error) {
+        console.error("Error fetching from primary source, trying backup:", error);
+        try {
+          const backupResponse = await fetch("https://nl1.api.radio-browser.info/json/stations/bycountry/Sweden");
+          const backupJson = await backupResponse.json();
+          const httpsChannels = backupJson.filter((channel) => channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://"));
+          setChannels(httpsChannels);
+          setOriginalChannels(httpsChannels);
+          setFilteredChannels(httpsChannels);
+        } catch (backupError) {
+          console.error("Error fetching from backup source:", backupError);
+        }
+      }
     };
 
     fetchData();
-    console.log(channels);
   }, []);
 
   useEffect(() => {
@@ -36,7 +46,6 @@ function RadioPlayer() {
   }, [channels, search]);
 
   function sortChannels() {
-    console.log("Sorterar kanaler efter röster");
     const sorted = [...fChannels].sort((a, b) => a.votes - b.votes);
     if (isReversed) {
       sorted.reverse();
@@ -46,7 +55,6 @@ function RadioPlayer() {
   }
 
   function resetChannels() {
-    console.log("Återställer kanaler");
     setFilteredChannels(
       originalChannels.filter((channel) =>
         channel.name.toLowerCase().includes(search.toLowerCase())
@@ -66,7 +74,6 @@ function RadioPlayer() {
         if (currentPlaying && currentPlaying !== stationuuid) {
           const currentAudio = document.getElementById(currentPlaying);
           if (currentAudio) {
-            console.log("Pausar:", currentAudio);
             currentAudio.pause();
             const currentPlayBtn = document.getElementById("btn" + currentPlaying);
             if (currentPlayBtn) {
@@ -83,18 +90,16 @@ function RadioPlayer() {
         audio.play();
         playBtn.innerHTML = '<i class="fa-solid fa-stop"></i>';
         stationCard.add("station-card-selected");
-        console.log("Spelar:", audio);
+
         setCurrentPlaying(stationuuid);
       } else {
         audio.pause();
         playBtn.innerHTML = '<i class="fas fa-play"></i>';
         stationCard.remove("station-card-selected");
 
-        console.log("Pausar:", audio);
         setCurrentPlaying(null);
       }
     } else {
-      console.log("Ej spelbar:", audio);
       alert("Denna station är inte tillgänglig för tillfället.");
       stationCardHTML.style.display = "none";
       setFilteredChannels(fChannels.filter((ch) => ch.stationuuid !== stationuuid));
