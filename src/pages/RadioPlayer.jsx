@@ -16,18 +16,25 @@ function RadioPlayer() {
         const response = await fetch("https://de1.api.radio-browser.info/json/stations/bycountry/Sweden");
         const json = await response.json();
         const httpsChannels = json.filter((channel) => channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://"));
-        setChannels(httpsChannels);
-        setOriginalChannels(httpsChannels);
-        setFilteredChannels(httpsChannels);
+        console.log(httpsChannels);
+        const playableChannels = await validatePlayableLinks(httpsChannels);
+        setChannels(playableChannels);
+        setOriginalChannels(playableChannels);
+        setFilteredChannels(playableChannels);
       } catch (error) {
         console.error("Error fetching from primary source, trying backup:", error);
         try {
           const backupResponse = await fetch("https://nl1.api.radio-browser.info/json/stations/bycountry/Sweden");
           const backupJson = await backupResponse.json();
-          const httpsChannels = backupJson.filter((channel) => channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://"));
-          setChannels(httpsChannels);
-          setOriginalChannels(httpsChannels);
-          setFilteredChannels(httpsChannels);
+          const httpsChannels = backupJson.filter((channel) =>
+            channel.url.startsWith("http") ||
+            channel.url_resolved.startsWith("http")
+          );
+          console.log(httpsChannels);
+          const playableChannels = await validatePlayableLinks(httpsChannels);
+          setChannels(playableChannels);
+          setOriginalChannels(playableChannels);
+          setFilteredChannels(playableChannels);
         } catch (backupError) {
           console.error("Error fetching from backup source:", backupError);
         }
@@ -36,6 +43,32 @@ function RadioPlayer() {
 
     fetchData();
   }, []);
+
+  const validatePlayableLinks = async (channels) => {
+    const results = await Promise.all(
+      channels.map((channel) =>
+        new Promise((resolve) => {
+          const audio = new Audio(channel.url || channel.url_resolved);
+          const timeout = setTimeout(() => resolve({ channel, isPlayable: false }), 30000);
+          audio.addEventListener("canplay", () => {
+            clearTimeout(timeout);
+            resolve({ channel, isPlayable: true });
+          }, { once: true });
+          audio.addEventListener("error", () => {
+            clearTimeout(timeout);
+            resolve({ channel, isPlayable: false });
+          }, { once: true });
+          audio.load();
+        })
+      )
+    );
+
+    const playableChannels = results
+      .filter((result) => result.isPlayable)
+      .map((result) => result.channel);
+    console.log(`${playableChannels.length} playable | ${channels.length - playableChannels.length} unplayable`);
+    return playableChannels;
+  };
 
   useEffect(() => {
     setFilteredChannels(
@@ -67,7 +100,7 @@ function RadioPlayer() {
     const stationCardHTML = document.getElementById("station" + stationuuid);
     const stationCard = stationCardHTML.classList;
 
-    if (audio && audio.error === null) {
+    if (audio) {
       const playBtn = document.getElementById("btn" + stationuuid);
 
       if (audio.paused) {
