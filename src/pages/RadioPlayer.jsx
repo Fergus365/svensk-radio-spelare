@@ -15,7 +15,21 @@ function RadioPlayer() {
       try {
         const response = await fetch("https://de1.api.radio-browser.info/json/stations/bycountry/Sweden");
         const json = await response.json();
-        const httpsChannels = json.filter((channel) => channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://"));
+
+        const upgradedChannels = json.map((channel) => {
+          if (channel.url.startsWith("http://")) {
+            channel.url = channel.url.replace("http://", "https://");
+          }
+          if (channel.url_resolved.startsWith("http://")) {
+            channel.url_resolved = channel.url_resolved.replace("http://", "https://");
+          }
+          return channel;
+        });
+
+        const httpsChannels = upgradedChannels.filter(
+          (channel) =>
+            channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://")
+        );
         console.log(httpsChannels);
         const playableChannels = await validatePlayableLinks(httpsChannels);
         setChannels(playableChannels);
@@ -26,9 +40,20 @@ function RadioPlayer() {
         try {
           const backupResponse = await fetch("https://nl1.api.radio-browser.info/json/stations/bycountry/Sweden");
           const backupJson = await backupResponse.json();
-          const httpsChannels = backupJson.filter((channel) =>
-            channel.url.startsWith("http") ||
-            channel.url_resolved.startsWith("http")
+
+          const upgradedChannels = backupJson.map((channel) => {
+            if (channel.url.startsWith("http://")) {
+              channel.url = channel.url.replace("http://", "https://");
+            }
+            if (channel.url_resolved.startsWith("http://")) {
+              channel.url_resolved = channel.url_resolved.replace("http://", "https://");
+            }
+            return channel;
+          });
+
+          const httpsChannels = upgradedChannels.filter(
+            (channel) =>
+              channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://")
           );
           console.log(httpsChannels);
           const playableChannels = await validatePlayableLinks(httpsChannels);
