@@ -30,7 +30,6 @@ function RadioPlayer() {
           (channel) =>
             channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://")
         );
-        console.log(httpsChannels);
         const playableChannels = await validatePlayableLinks(httpsChannels);
         setChannels(playableChannels);
         setOriginalChannels(playableChannels);
@@ -55,7 +54,6 @@ function RadioPlayer() {
             (channel) =>
               channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://")
           );
-          console.log(httpsChannels);
           const playableChannels = await validatePlayableLinks(httpsChannels);
           setChannels(playableChannels);
           setOriginalChannels(playableChannels);
