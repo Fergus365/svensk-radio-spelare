@@ -93,8 +93,7 @@ nav {
   background-color: rgba(255, 255, 255, 0.87);
   justify-content: space-between;
   gap: 0.5rem;
-  border-left: 1px solid #646cff;
-  border-bottom: 1px solid #646cff;
+  border-bottom: 1px solid hsl(0, 0%, 94%);
   padding: 1rem;
 }
 
