@@ -49,6 +49,7 @@ header {
   align-items: center;
   flex-direction: column;
   text-align: center;
+  height: fit-content;
 }
 
 nav {
@@ -59,12 +60,11 @@ nav {
 .site-meta {
   display: flex;
   align-items: center;
+  height: 100%;
 }
 
 .site-meta .logo {
-  width: 64px;
-  height: 64px;
-  padding: 0.25rem;
+  height: 100%;
 }
 
 .site-title {
@@ -81,22 +81,21 @@ nav {
   gap: 2rem;
   flex-wrap: wrap;
   margin-top: 1rem;
-  height: calc(363px + 6rem);
-  overflow-y: scroll;
+  align-items: flex-start;
 }
 
 .station-card {
   height: fit-content;
   display: flex;
-  min-width: calc(320px - 4rem);
-  flex: 1 1 calc(50% - 2rem);
-  max-width: calc(50% - 2rem);
+  min-width: calc(213.333333333px - 4rem);
+  flex: 1 1 calc(33.3333333333% - 2rem);
+  max-width: calc(33.3333333333% - 2rem);
   background-color: rgba(255, 255, 255, 0.87);
   justify-content: space-between;
   gap: 0.5rem;
   border-left: 1px solid #646cff;
   border-bottom: 1px solid #646cff;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 .station-card-selected {
@@ -113,15 +112,20 @@ nav {
   flex-wrap: wrap;
   place-content: center;
   padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.87);
-  opacity: 0.95;
+  background-color: hsla(0, 0%, 100%, 0.85);
   border: 1px solid #646cff;
 }
 
 .station-card h3 {
-  font-size: clamp(1rem, 2vw, 1.1rem);
+  font-size: 1.1rem;
   word-wrap: break-word;
   word-break: break-all;
+  overflow: hidden;
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
 }
 
 
@@ -153,7 +157,6 @@ nav {
 .station-card-selected .card-header h3 {
   text-align: left;
   line-height: 110%;
-  white-space: nowrap;
 }
 
 .station-card-selected .card-body {
@@ -223,9 +226,5 @@ nav {
     max-width: calc(100% - 2rem);
   }
 
-  .station-card-selected .card-header h3 {
-    width: 8ch;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
+  .station-card-selected .card-header h3 {}
 }

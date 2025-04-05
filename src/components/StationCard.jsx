@@ -9,7 +9,7 @@ function StationCard({ fchannel, playAndPause, fChannels }) {
             className="station-img"
             src={fchannel.favicon ? fchannel.favicon : "https://placehold.co/100x100?text=Station+Logo"}
           />
-          <h3>{fchannel.name}</h3>
+          <h3 title={fchannel.name}>{fchannel.name}</h3>
         </div>
         <div>
           <p>Likes: {fchannel.votes}</p>

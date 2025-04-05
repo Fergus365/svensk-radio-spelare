@@ -4,7 +4,7 @@ function Header() {
   return (
     <header>
       <div className="site-meta">
-        <img src="./logo.png" alt="" />
+        <img className="logo" src="./logo.png" alt="" />
       </div>
       <nav>
         <NavLink to="/">Hem</NavLink>
