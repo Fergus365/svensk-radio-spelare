@@ -3,15 +3,13 @@ import { NavLink } from "react-router";
 function Header() {
   return (
     <header>
-      <div className="site-meta">
-        <img className="logo" src="./logo.png" alt="" />
+      <div>
+        <NavLink to="/"><img className="logo" src="./logo.png" alt="World Radio Service Logo" /></NavLink>
       </div>
       <nav>
-        <NavLink to="/">Hem</NavLink>
-        <NavLink to="/radioplayer">Radio Kanaler</NavLink>
-        <NavLink to="/om-svensk-radio-spelare">Om Svensk Radio Spelare</NavLink>
+        <NavLink className="lato-bold text-links" to="/all-stations">All Stations</NavLink>
+        <NavLink className="lato-bold text-links" to="/about">About</NavLink>
       </nav>
-      <div className="spacer"></div>
     </header>
   );
 }

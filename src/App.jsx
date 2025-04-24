@@ -13,8 +13,8 @@ function App() {
       <main>
         <Routes>
           <Route path="/" Component={Hem}></Route>
-          <Route path="/radioplayer" Component={RadioPlayer}></Route>
-          <Route path="/om-svensk-radio-spelare" Component={OmSvenskRadioSpelare}></Route>
+          <Route path="/all-stations" Component={RadioPlayer}></Route>
+          <Route path="/about" Component={OmSvenskRadioSpelare}></Route>
         </Routes>
       </main>
     </HashRouter>
