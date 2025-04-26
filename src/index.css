@@ -1,3 +1,5 @@
+@import "./components/Overview/Overview.css";
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -50,5 +52,4 @@ h1 {
 
 .heroBtn:hover {
   opacity: 0.65;
-
 }

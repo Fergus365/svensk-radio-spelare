@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import StationCard from "../components/StationCard";
 import useFetchData from "../components/fetchData";
 import pLimit from "p-limit";
-import DOMPurify from "dompurify"; // Optional: Install with `npm install dompurify`
+import DOMPurify from "dompurify"; // Cleaning library to sanitize user input
 
 function RadioPlayer() {
   const { fetchData } = useFetchData();
@@ -114,7 +114,7 @@ function RadioPlayer() {
             try {
               const url = channel.url || channel.url_resolved;
 
-              // Accept only <audio>-playable formats
+              /*// Accept only <audio>-playable formats
               const validExtensions = ["mp3", "ogg", "wav", "aac", "flac", "opus", "m4a"];
               const isValidFormat = validExtensions.some((ext) => url.includes(ext));
 
@@ -122,7 +122,7 @@ function RadioPlayer() {
                 console.warn(`Skipping unsupported format for channel: ${channel.name}`);
                 resolve({ channel, isPlayable: false });
                 return;
-              }
+              }*/
 
               // Handle URLs with a HEAD request
               const response = await fetch(url, {
@@ -231,7 +231,7 @@ function RadioPlayer() {
       <div className="search-station-container">
 
         <input
-          disabled={!(isLoading === 1 || isLoading === 4)}
+          disabled={!(isLoading === 1 || isLoading === 4) || allChannels.length === 0}
           className="search-station poppins-semibold"
           type="text"
           placeholder="Search with genres, tags or station names..."

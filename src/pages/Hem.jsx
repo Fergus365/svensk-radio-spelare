@@ -1,10 +1,15 @@
-import { NavLink } from "react-router";
 import RadioPlayer from "./RadioPlayer";
+import Overview from "../components/Overview/Overview";
 
 function Hem() {
-    function scrollToStations() {
+    function scrollToPlayer() {
         const element = document.getElementById("all-stations");
-        element.scrollIntoView({ behavior: "smooth" });
+        element.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function scrollToOverview() {
+        const element = document.getElementById("overview");
+        element.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     return (
@@ -16,16 +21,28 @@ function Hem() {
                             <h1 className="poppins-semibold">World Radio Service</h1>
                             <p className="lato-bold">All your favorite radio stations in ONE place</p>
                             <div>
-                                <a onClick={scrollToStations} className="lato-bold heroBtn text-links">All Stations <i className="fa-solid fa-arrow-right"></i></a>
-                                <NavLink className="heroBtn lato-bold text-links" to="/about">About us <i className="fa-solid fa-arrow-right"></i></NavLink>
+                                <a onClick={scrollToPlayer} className="lato-bold heroBtn text-links"><i class="fa-solid fa-tower-cell"></i> All Stations</a>
+                                <a onClick={scrollToOverview} className="lato-bold heroBtn text-links"><i class="fa-solid fa-table-list"></i> Overview</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="spacer"></div>
+            <div className="section-overview" id="overview">
+                <Overview />
+            </div>
+            <div className="spacer"></div>
             <div className="section-radio-player" id="all-stations">
                 <RadioPlayer />
+            </div>
+            <div className="spacer"></div>
+            <div className="section-footer">
+                <div className="wrapper">
+                    <div className="footer-content">
+                        <p className="lato-regular">Made by <a href="#">Kristoffer Karlsson</a></p>
+                    </div>
+                </div>
             </div>
         </>
     );
