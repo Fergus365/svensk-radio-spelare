@@ -1,55 +1,10 @@
+@import "./App.css";
+@import "./components/Header/Header.css";
 @import "./components/Overview/Overview.css";
+@import "./components/GDPRConsent/GDPRConsent.css";
+@import "./components/StationCard/StationCard.css";
+@import "./components/Footer/Footer.css";
+@import "./components/RadioPlayer/RadioPlayer.css";
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color: #595959;
-  background-color: rgba(255, 255, 255, 0.87);
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-.text-links {
-  font-weight: 500;
-  color: #0058AB;
-  text-decoration: inherit;
-  transition: border 0.25s, color 0.25s;
-  padding: 12px 16px;
-}
-
-.text-links.active {
-  color: #595959;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-.heroBtn {
-  border-radius: 2rem;
-  border: 2px solid rgba(255, 255, 255, 0.25);
-  color: white;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  cursor: pointer;
-  transition: opacity 0.25s;
-  background-color: transparent;
-}
-
-.heroBtn:hover {
-  opacity: 0.65;
-}
+@import "./pages/Home/Home.css";
+@import "./pages/PrivacyPolicy/PrivacyPolicy.css";

@@ -1,21 +1,22 @@
-
-import { HashRouter, Route, Routes } from "react-router";
-import Header from "./components/Header";
-import RadioPlayer from "./pages/RadioPlayer";
-import Hem from "./pages/Hem";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home/Home";
+import PrivacyPolicy from "./pages/PrivacyPolicy/PrivacyPolicy";
 import "./App.css";
 
 function App() {
   return (
-    <HashRouter>
+    <>
       <Header />
       <main>
         <Routes>
-          <Route path="/" Component={Hem}></Route>
-          <Route path="/all-stations" Component={RadioPlayer}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         </Routes>
       </main>
-    </HashRouter>
+      <Footer />
+    </>
   );
 }
 

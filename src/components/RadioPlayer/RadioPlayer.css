@@ -1,0 +1,187 @@
+.radioplayer h2 {
+    color: #1a1a1a;
+}
+
+.favorite-btn {
+    transition: all 0.25s;
+    cursor: pointer;
+    border-radius: 2rem;
+    border: none;
+    background-color: transparent;
+    padding: 0.5rem;
+    color: #1a1a1a;
+}
+
+.favorite-btn:hover {
+    transform: scale(1.1);
+    color: #E63946;
+}
+
+.favorite-active {
+    color: #E63946;
+}
+
+.loading-text {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+}
+
+.station-grid {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    align-items: flex-start;
+}
+
+.station-background {
+    background-color: #e6e6e6;
+    padding: 1rem;
+    margin-bottom: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 5px #0000001a;
+}
+
+.load-more-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.load-more-button {
+    border-radius: 2rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    color: #1a1a1a;
+    cursor: pointer;
+    transition: all 0.25s;
+    background-color: white;
+    border: 1px solid hsl(0, 0%, 88%);
+}
+
+.load-more-button:hover {
+    transform: scale(1.1);
+    background-color: #E63946;
+    color: white;
+    border: 1px solid hsl(0, 0%, 88%);
+}
+
+.bottom-spacer {
+    width: 100%;
+    height: calc(114px + 2rem);
+}
+
+.station-img {
+    aspect-ratio: 1/1;
+    height: 32px;
+    border-radius: 8px;
+}
+
+.search-station-container {
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+    border-radius: 1rem;
+}
+
+.search-station-container .search-station {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-radius: 20vw;
+    border: 1px solid hsl(0, 0%, 88%);
+    color: #595959;
+}
+
+.search-station-container p {
+    color: #1a1a1a;
+}
+
+.search-station:focus {
+    outline: none;
+}
+
+.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.station-list-container {
+    display: flex;
+    align-items: center;
+}
+
+.station-list {
+    padding: 1rem 1rem 1rem 0.25rem;
+    outline: none;
+    border: none;
+    color: #E63946;
+
+    background-color: white;
+    cursor: pointer;
+
+    -webkit-appearance: none;
+    /* Remove default arrow in WebKit browsers (Chrome, Safari, etc.) */
+    -moz-appearance: none;
+    /* Remove default arrow in Firefox */
+    appearance: none;
+    /* Standard property to remove default arrow */
+    background-image: none;
+    /* Remove any background image (like the arrow) */
+}
+
+.station-list option {
+    color: #1a1a1a;
+    background-color: white;
+    cursor: pointer;
+}
+
+.btn-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.showHideStationItem {
+    display: none;
+}
+
+.showHideStationItemReverse {
+    display: block;
+}
+
+.volume-range {
+    display: none;
+}
+
+.volume-range-container {
+    display: none;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes slideInVolume {
+    0% {
+        opacity: 0;
+        transform: translatex(10px), rotate(-90deg);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translatex(0), rotate(-90deg);
+    }
+}
+
+@media (max-width:768px) {
+    .station-list {
+        width: 100%;
+    }
+}

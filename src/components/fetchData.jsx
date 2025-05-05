@@ -2,7 +2,6 @@
 function useFetchData() {
 
     const fetchData = async (countryCode) => {
-        console.log('fetchData', countryCode);
         const apiServers = [
             `https://de1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
             `https://fr1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
@@ -34,8 +33,12 @@ function useFetchData() {
                             channel.url.startsWith("https://") || channel.url_resolved.startsWith("https://")
                     );
                     success = true;
-                    console.log('fetchData', httpsChannels);
-                    return httpsChannels;
+                    // Remove duplicate channels based on stationuuid
+                    const uniqueChannels = httpsChannels.filter(
+                        (channel, index, self) =>
+                            index === self.findIndex((ch) => ch.stationuuid === channel.stationuuid)
+                    );
+                    return uniqueChannels;
                 }
             } catch (error) {
                 console.warn(`Server failed: ${server}`, error);

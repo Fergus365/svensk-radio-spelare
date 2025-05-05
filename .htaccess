@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /dist2/
+RewriteRule ^index\.html$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /dist2/index.html [L]
