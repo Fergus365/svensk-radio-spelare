@@ -12,12 +12,6 @@ function overview() {
                         </div>
                     </div>
                     <div className="overview-dropdown">
-                        <div className="overview-dropdown-title inter-text-bold" onClick={() => document.querySelector('#overview-dropdown-content-2').classList.toggle('overview-dropdown-content-hide')}><i class="fa-solid fa-screwdriver-wrench"></i> How It’s Built</div>
-                        <div id="overview-dropdown-content-2" className="overview-dropdown-content">
-                            <p className="inter-text">The app is built with React, JavaScript, HTML, and CSS to ensure everything loads fast, looks clean, and works smoothly across devices.</p>
-                        </div>
-                    </div>
-                    <div className="overview-dropdown">
                         <div className="overview-dropdown-title inter-text-bold" onClick={() => document.querySelector('#overview-dropdown-content-3').classList.toggle('overview-dropdown-content-hide')}><i class="fa-solid fa-globe"></i> Powered by Radio Browser API</div>
                         <div id="overview-dropdown-content-3" className="overview-dropdown-content">
                             <p className="inter-text">We use the Radio Browser API to bring you a wide selection of global radio stations. It provides real-time access to station names, streams, and other info — all in one place.</p>

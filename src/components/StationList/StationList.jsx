@@ -1,5 +1,7 @@
+import React, { useEffect, useState } from "react";
 
-function useFetchData() {
+function StationList() {
+    const [allWorldChannels, setAllWorldChannels] = useState([]);
 
     // Helper function to check for unplayable audio formats
     const isUnplayableAudioFormat = (url) => {
@@ -8,14 +10,18 @@ function useFetchData() {
         return unplayableAudioExtensions.test(url);
     };
 
-    const fetchData = async (countryCode) => {
+    useEffect(() => {
+        fetchData();
+    }, [])
+
+    async function fetchData() {
         const apiServers = [
-            `https://de1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
-            `https://fr1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
-            `https://nl1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
-            `https://us1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
-            `https://at1.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
-            `https://all.api.radio-browser.info/json/stations/bycountrycodeexact/${countryCode}`,
+            `https://de1.api.radio-browser.info/json/stations/topvote/10`,
+            `https://fr1.api.radio-browser.info/json/stations/topvote/10`,
+            `https://nl1.api.radio-browser.info/json/stations/topvote/10`,
+            `https://us1.api.radio-browser.info/json/stations/topvote/10`,
+            `https://at1.api.radio-browser.info/json/stations/topvote/10`,
+            `https://all.api.radio-browser.info/json/stations/topvote/10`,
         ];
 
         let success = false;
@@ -51,8 +57,9 @@ function useFetchData() {
                     const filteredChannels = okChannels.filter((channel) => {
                         return !isUnplayableAudioFormat(channel.url_resolved) && !isUnplayableAudioFormat(channel.url);
                     });
-
-                    return filteredChannels;
+                    console.log('all stations', filteredChannels)
+                    setAllWorldChannels(filteredChannels.slice(0, 10));
+                    break;
                 }
             } catch (error) {
                 console.warn(`Server failed: ${server}`, error);
@@ -60,11 +67,30 @@ function useFetchData() {
         }
 
         if (!success) {
-            throw new Error("All servers failed to respond.");
+            console.error("All servers failed to respond.");
+            setAllWorldChannels([]);
         }
     };
 
-    return { fetchData };
-}
+    return (
+        <div className="stationlist-container">
+            <h2 className="montserrat-title">Top 10 Radio Stations Around the World</h2>
 
-export default useFetchData;
+            <div className="stationlist">
+                {allWorldChannels.map((station) => (
+                    <div key={station.stationuuid} className="stationlist-item">
+                        <p className="inter-text">{station.country}</p>
+                        <a href={station.homepage}>
+                            <img src={station.favicon} alt={`${station.name} logo`} />
+                        </a>
+                        <h3 className="inter-text-bold">{station.name}</h3>
+                        <p className="inter-text"><i className="fa-solid fa-thumbs-up"></i> {station.votes}</p>
+
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};
+
+export default StationList;

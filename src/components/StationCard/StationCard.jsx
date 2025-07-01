@@ -19,7 +19,7 @@ function StationCard({ fchannel, playAndPause, fChannels, currentVolume, setCurr
     <div className="station-card" id={"station" + fchannel.stationuuid}>
       <div className="card-header">
         <div>
-          <img src="./favicon.webp" alt="" />
+          <img src="./favicon.webp" alt="website logo" />
           <h3 className="inter-text-bold" title={fchannel.name}>{fchannel.name}</h3>
         </div>
         <p className="inter-text showHideStationItemReverse"><i className="fa-solid fa-thumbs-up"></i> {fchannel.votes}</p>

@@ -169,16 +169,8 @@ function RadioPlayer() {
 
       setIsLoading(3.5); // Update loading state to indicate validation progress
 
-      // Step 1: Filter out channels that have a lastcheckok value of 1 and hls value of 0
-      const okChannels = fetchedChannels.filter((c) => c.lastcheckok === 1 && c.hls === 0);
-
-      // Step 2: Filter out channels with unplayable formats (exclude bad formats)
-      const filteredChannels = okChannels.filter((channel) => {
-        return !isUnplayableAudioFormat(channel.url_resolved) && !isUnplayableAudioFormat(channel.url);
-      });
-
       // Step 3: Set all channels to the filtered list
-      setAllChannels(filteredChannels);
+      setAllChannels(fetchedChannels);
 
       setIsLoading(4); // Loading complete
     } catch (error) {
@@ -186,13 +178,6 @@ function RadioPlayer() {
       setIsLoading(1); // Reset loading state on error
     }
   }
-
-  // Helper function to check for unplayable audio formats
-  const isUnplayableAudioFormat = (url) => {
-    // Unplayable formats for <audio> tag (e.g., playlist formats and video formats)
-    const unplayableAudioExtensions = /\.(m3u|m3u8|pls|asx|mp4|webm)$/i;
-    return unplayableAudioExtensions.test(url);
-  };
 
   // *******************************************************************************
   // UTILITY FUNCTIONS

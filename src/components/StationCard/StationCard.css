@@ -158,7 +158,7 @@
     border: 1px solid hsl(0, 0%, 88%);
     color: #1a1a1a;
     cursor: pointer;
-    transition: all 0.25s;
+    transition: all 0.25s ease;
 }
 
 .card-body button:hover {

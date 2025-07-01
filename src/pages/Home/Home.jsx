@@ -1,7 +1,9 @@
 import RadioPlayer from "../../components/RadioPlayer/RadioPlayer";
 import Overview from "../../components/Overview/Overview";
+import StationList from "../../components/StationList/StationList";
 
 function Home() {
+
     function scrollToPlayer() {
         const element = document.getElementById("all-stations");
         element.scrollIntoView({ behavior: "smooth", block: "nearest" });
@@ -10,6 +12,13 @@ function Home() {
     function scrollToOverview() {
         const element = document.getElementById("overview");
         element.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+
+    function toggleRadioPlayer() {
+        const HTMLAllStations = document.querySelector('#all-stations');
+        const HTMLAllStationsClasses = HTMLAllStations.classList;
+        console.log(HTMLAllStationsClasses);
+        HTMLAllStationsClasses.toggle("popout");
     }
 
     return (
@@ -29,11 +38,18 @@ function Home() {
                 </div>
             </div>
             <div className="spacer"></div>
+            <div className="section-stationlist" id="stationlist">
+                <div className="wrapper">
+                    <StationList />
+                </div>
+            </div>
+            <div className="spacer"></div>
             <div className="section-overview" id="overview">
                 <Overview />
             </div>
             <div className="spacer"></div>
             <div className="section-radio-player" id="all-stations">
+                <button onClick={toggleRadioPlayer}>Klicka!</button>
                 <RadioPlayer />
             </div>
         </>

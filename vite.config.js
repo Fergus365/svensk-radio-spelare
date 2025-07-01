@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/dist2/',
   esbuild: {
-    drop: ['console', 'debugger'],
+    drop: ['debugger'],
   },
   server: {
     historyApiFallback: true,

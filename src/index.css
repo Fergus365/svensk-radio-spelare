@@ -5,6 +5,7 @@
 @import "./components/StationCard/StationCard.css";
 @import "./components/Footer/Footer.css";
 @import "./components/RadioPlayer/RadioPlayer.css";
+@import "./components/StationList/StationList.css";
 
 @import "./pages/Home/Home.css";
 @import "./pages/PrivacyPolicy/PrivacyPolicy.css";
